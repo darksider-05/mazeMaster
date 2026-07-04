@@ -1,6 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:mazemaster/components/board.dart';
 import 'package:mazemaster/components/sky_widget.dart';
 import 'package:mazemaster/providers/app_root.dart';
 import 'package:mazemaster/providers/star_provider.dart';
@@ -41,17 +40,9 @@ class AppRoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var root = RootState(context);
-    var vh = root.vh();
-    var vw = root.vw();
-    return Stack(
-      children: [
-        SkyWidget(),
-        BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-          child: SizedBox(height: vh, width: vw),
-        ),
-      ],
-    );
+    // var root = RootState(context);
+    // var vh = root.vh();
+    // var vw = root.vw();
+    return Stack(children: [SkyWidget(), GameBoard()]);
   }
 }

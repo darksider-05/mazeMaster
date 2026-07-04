@@ -35,4 +35,7 @@ async def engine() :
     if (p.hasWon):
         print("you won! :) ")
 
+    print("\n\n")
+    input("press enter to exit (the jank is disposed after this, it's safe to igonre it)---")
+    print('\x1B[2J\x1B[0;0H')
 asyncio.run(engine())

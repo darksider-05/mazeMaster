@@ -13,7 +13,7 @@ class StarSimulation extends ChangeNotifier {
     stars.removeWhere((star) => star.x >= vw || star.y <= 0);
 
     if (stars.length <= 500) {
-      if (Random().nextInt(101) < 15) {
+      if (Random().nextInt(101) < 20) {
         stars.add(Star(vw, vh, random));
       }
     }
@@ -34,9 +34,11 @@ class Star {
   late final double dy;
 
   Star(double vw, double vh, Random random) {
-    x = 0;
+    bool startMode = random.nextBool();
 
-    y = (random.nextDouble() * vh * 2);
+    x = startMode ? 0 : (random.nextDouble() * vw);
+
+    y = startMode ? (random.nextDouble() * vh) : vh;
 
     double straightLength = sqrt(y * y + vw * vw);
 
@@ -46,20 +48,20 @@ class Star {
     opacity = 1;
     int radProb = random.nextInt(101);
     radius = radProb <= 70
-        ? 3
-        : radProb <= 90
         ? 5
-        : 7;
+        : radProb <= 90
+        ? 7
+        : 11;
 
     switch (radius) {
-      case 3:
+      case 5:
         speed = 30;
         break;
-      case 5:
-        speed = 40;
+      case 7:
+        speed = 37;
         break;
       default:
-        speed = 50;
+        speed = 45;
     }
   }
 
@@ -67,13 +69,13 @@ class Star {
     x += 1 * dt * speed;
     y -= 1 * dt * speed;
 
-    opacity += opacityChange * dt * 0.5;
+    opacity += opacityChange * dt * 0.35;
 
     if (opacity <= 0.2) {
       opacity = 0.2;
       opacityChange = 1;
-    } else if (opacity >= 0.95) {
-      opacity = 0.95;
+    } else if (opacity >= 0.7) {
+      opacity = 0.7;
       opacityChange = -1;
     }
   }
