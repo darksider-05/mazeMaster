@@ -20,7 +20,7 @@ class _GameBoardState extends State<GameBoard> {
     double wholeSize,
   ) {
     List<(double, double, int, int)> result = [];
-    var topLeftCorner = ((vw - wholeSize) / 2, (vh - wholeSize) * 1 / 4);
+    var topLeftCorner = ((vw - wholeSize) / 2, (vh - wholeSize) / 2);
     for (int enum1 = 0; enum1 < gridSize; enum1++) {
       for (int enum2 = 0; enum2 < gridSize; enum2++) {
         result.add((
@@ -39,9 +39,9 @@ class _GameBoardState extends State<GameBoard> {
     var root = RootState(context);
     var vh = root.vh();
     var vw = root.vw();
-    var wholeSize = 0.8 * min(vh, vw);
-    const gridSize = 5;
-    var cellSize = wholeSize / gridSize;
+    var wholeSize = 0.6 * min(vh, vw);
+    const gridSize = 6;
+    var cellSize = wholeSize / (gridSize - 1);
     List<(double, double, int, int)> processed = processGrid(
       gridSize,
       cellSize,
@@ -64,7 +64,7 @@ class _GameBoardState extends State<GameBoard> {
           vx: vx,
           vy: vy,
           cellSize: cellSize,
-          player: (0, 0),
+          player: (2, 2),
         ),
       );
     }

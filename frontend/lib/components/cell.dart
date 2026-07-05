@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mazemaster/providers/game_provider.dart';
+import 'package:provider/provider.dart';
 
 class Cell extends StatelessWidget {
   const Cell({
@@ -17,17 +19,13 @@ class Cell extends StatelessWidget {
   final double cellSize;
   final (int, int) player;
 
-  /// notice! the correct way to call an item in the grid is to use `grid[vy][vx]` or `grid[relativeL.$2][relativeL.$1]`
-  static const List<List<int>> grid = [
-    [0, 1, 0, 1, 1],
-    [0, 1, 0, 1, 1],
-    [0, 0, 0, 0, 0],
-    [1, 1, 0, 1, 0],
-    [1, 1, 1, 1, 0],
-  ];
-
   @override
   Widget build(BuildContext context) {
+    var game = Provider.of<GameProvider>(context);
+
+    /// Grid indexing uses [y][x], not [x][y].
+    List<List<int>> grid = game.maze;
+
     final (int, int) index = (vx, vy);
     (int, int) relativeL = (player.$1 + index.$1 - 2, player.$2 + index.$2 - 2);
     bool isInWorld =
@@ -36,7 +34,17 @@ class Cell extends StatelessWidget {
         relativeL.$2 >= 0 &&
         relativeL.$2 < grid[0].length;
 
-    if (!isInWorld) return Container();
+    if (!isInWorld) {
+      return Positioned(
+        left: leftPad,
+        top: topPad,
+        child: Container(
+          width: cellSize,
+          height: cellSize,
+          color: Colors.black,
+        ),
+      );
+    }
     return Positioned(
       left: leftPad,
       top: topPad,

@@ -12,7 +12,7 @@ class StarSimulation extends ChangeNotifier {
     }
     stars.removeWhere((star) => star.x >= vw || star.y <= 0);
 
-    if (stars.length <= 500) {
+    if (stars.length <= 200) {
       if (Random().nextInt(101) < 20) {
         stars.add(Star(vw, vh, random));
       }
