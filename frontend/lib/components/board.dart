@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mazemaster/components/cell.dart';
 import 'package:mazemaster/providers/app_root.dart';
+import 'package:mazemaster/providers/game_provider.dart';
+import 'package:provider/provider.dart';
 
 class GameBoard extends StatefulWidget {
   const GameBoard({super.key});
@@ -36,12 +38,13 @@ class _GameBoardState extends State<GameBoard> {
 
   @override
   Widget build(BuildContext context) {
+    var game = Provider.of<GameProvider>(context);
     var root = RootState(context);
     var vh = root.vh();
     var vw = root.vw();
     var wholeSize = 0.6 * min(vh, vw);
-    const gridSize = 6;
-    var cellSize = wholeSize / (gridSize - 1);
+    const gridSize = 5;
+    var cellSize = wholeSize / (gridSize);
     List<(double, double, int, int)> processed = processGrid(
       gridSize,
       cellSize,
@@ -64,7 +67,7 @@ class _GameBoardState extends State<GameBoard> {
           vx: vx,
           vy: vy,
           cellSize: cellSize,
-          player: (2, 2),
+          player: game.player,
         ),
       );
     }

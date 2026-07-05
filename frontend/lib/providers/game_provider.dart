@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class GameProvider extends ChangeNotifier {
   List<List<int>> maze = [];
-  Offset player = Offset.zero;
+  (int, int) player = (0, 0);
   double help = 0;
   bool over = false;
   bool won = false;
@@ -30,7 +30,7 @@ class GameProvider extends ChangeNotifier {
   }
 
   void setPlayer(int x, int y, int help) {
-    player = Offset(x.toDouble(), y.toDouble());
+    player = (x, y);
     this.help = help / 50;
     notifyListeners();
   }
