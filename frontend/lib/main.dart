@@ -16,6 +16,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => StarSimulation()),
         ChangeNotifierProvider(create: (_) => GameProvider()),
         Provider(
+          lazy: false,
           create: (context) => SocketProvider(context.read<GameProvider>()),
         ),
       ],

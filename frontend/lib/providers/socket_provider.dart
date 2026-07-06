@@ -7,7 +7,7 @@ class SocketProvider {
   final WebSocketChannel channel;
 
   SocketProvider(GameProvider game)
-    : channel = WebSocketChannel.connect(Uri.parse("ws://localhost:8765")) {
+    : channel = WebSocketChannel.connect(Uri.parse("ws://127.0.0.1:8765")) {
     channel.stream.listen((message) {
       game.applyMessage(jsonDecode(message));
     });
