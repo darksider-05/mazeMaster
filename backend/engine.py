@@ -32,7 +32,8 @@ async def engine(visualizer, gui) :
         "type": "state",
         "px":int(p.x),
         "py":int(p.y),
-        "help":mover.helpBuffer
+        "help":mover.helpBuffer,
+        "hints" : p.hints
     }
 )
         await asyncio.sleep(interval)

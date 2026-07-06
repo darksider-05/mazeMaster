@@ -4,6 +4,7 @@ class GameProvider extends ChangeNotifier {
   List<List<int>> maze = [];
   (int, int) player = (0, 0);
   double help = 0;
+  int hints = 5;
   bool over = false;
   bool won = false;
 
@@ -14,7 +15,7 @@ class GameProvider extends ChangeNotifier {
         break;
 
       case "state":
-        setPlayer(msg["px"], msg["py"], msg["help"]);
+        setPlayer(msg["px"], msg["py"], msg["help"], msg["hints"]);
         break;
       case "game_over":
         over = true;
@@ -29,9 +30,10 @@ class GameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setPlayer(int x, int y, num help) {
+  void setPlayer(int x, int y, num help, int hints) {
     player = (x, y);
     this.help = help.toDouble() / 50;
+    this.hints = hints;
     notifyListeners();
   }
 }

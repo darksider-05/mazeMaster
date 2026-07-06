@@ -2,8 +2,6 @@ import asyncio
 import json
 import websockets
 import world
-import player
-import mover
 
 class VisualizationServer:
     def __init__(self):
