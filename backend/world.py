@@ -60,7 +60,7 @@ def shuffle(lst:list):
     return result
 
 
-
+print("the maximum size for a grid is 44")
 world = initWorld(int(input("please tell me the maze size: ")))
 
 
