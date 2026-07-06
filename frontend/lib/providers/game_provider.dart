@@ -31,7 +31,7 @@ class GameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setPlayer(int x, int y, double help) {
+  void setPlayer(int x, int y, int help) {
     player = (x, y);
     this.help = help / 50;
     notifyListeners();
