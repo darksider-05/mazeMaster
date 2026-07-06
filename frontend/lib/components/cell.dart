@@ -33,15 +33,38 @@ class Cell extends StatelessWidget {
         relativeL.$1 >= 0 &&
         relativeL.$2 >= 0 &&
         relativeL.$2 < grid[0].length;
-
+    const double borderRoundness = 30;
     if (!isInWorld) {
       return Positioned(
         left: leftPad,
         top: topPad,
         child: Container(
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: vx == 0
+                ? vy == 0
+                      ? BorderRadius.only(
+                          topLeft: Radius.circular(borderRoundness),
+                        )
+                      : vy == 4
+                      ? BorderRadius.only(
+                          bottomLeft: Radius.circular(borderRoundness),
+                        )
+                      : BorderRadius.all(Radius.zero)
+                : vx == 4
+                ? vy == 0
+                      ? BorderRadius.only(
+                          topRight: Radius.circular(borderRoundness),
+                        )
+                      : vy == 4
+                      ? BorderRadius.only(
+                          bottomRight: Radius.circular(borderRoundness),
+                        )
+                      : BorderRadius.all(Radius.zero)
+                : BorderRadius.all(Radius.zero),
+          ),
           width: cellSize,
           height: cellSize,
-          color: Colors.black,
         ),
       );
     }
@@ -51,13 +74,37 @@ class Cell extends StatelessWidget {
       child: Container(
         width: cellSize,
         height: cellSize,
-        color: grid[relativeL.$2][relativeL.$1] == 1
-            ? Colors.black
-            : Colors.white,
-        child: grid[relativeL.$2][relativeL.$1] == 4
+        decoration: BoxDecoration(
+          borderRadius: vx == 0
+              ? vy == 0
+                    ? BorderRadius.only(
+                        topLeft: Radius.circular(borderRoundness),
+                      )
+                    : vy == 4
+                    ? BorderRadius.only(
+                        bottomLeft: Radius.circular(borderRoundness),
+                      )
+                    : BorderRadius.all(Radius.zero)
+              : vx == 4
+              ? vy == 0
+                    ? BorderRadius.only(
+                        topRight: Radius.circular(borderRoundness),
+                      )
+                    : vy == 4
+                    ? BorderRadius.only(
+                        bottomRight: Radius.circular(borderRoundness),
+                      )
+                    : BorderRadius.all(Radius.zero)
+              : BorderRadius.all(Radius.zero),
+          border: Border.all(color: Colors.blue, width: 0.5),
+          color: grid[relativeL.$2][relativeL.$1] == 1
+              ? Colors.black
+              : Colors.white,
+        ),
+        child: (relativeL.$1, relativeL.$2) == player
             ? Container(
-                width: cellSize,
-                height: cellSize,
+                width: cellSize / 2,
+                height: cellSize / 2,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.red,

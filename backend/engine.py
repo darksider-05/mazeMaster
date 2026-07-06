@@ -6,7 +6,7 @@ import world
 import mover
 from checker import checkState
 
-async def engine(visualizer) :
+async def engine(visualizer, gui) :
     print('\x1B[2J\x1B[0;0H')
     frames = 10
     interval = 1/frames
@@ -22,14 +22,16 @@ async def engine(visualizer) :
         
         
         checkState(p, world.world)
-        printer(p, world.world, mover.helpBuffer)
+        if not(gui):
+            printer(p, world.world, mover.helpBuffer)
         
-        mover.mover(p, world.world, dt, world.blocker)
-        await visualizer.publish(
+        await mover.mover(p, world.world, dt, world.blocker, visualizer, gui)
+        if gui:
+            await visualizer.publish(
     {
         "type": "state",
-        "px":p.x,
-        "py":p.y,
+        "px":int(p.x),
+        "py":int(p.y),
         "help":mover.helpBuffer
     }
 )
@@ -39,18 +41,20 @@ async def engine(visualizer) :
 
     print('\x1B[2J\x1B[0;0H')
     if (p.hasLost):
-        await visualizer.publish({
+        if gui:
+            await visualizer.publish({
             "type": "game_over",
             "won": 0
         })
         print("you lost :|")
     if (p.hasWon):
-        await visualizer.publish({
+        if gui:
+            await visualizer.publish({
             "type": "game_over",
             "won": 1
         })
         print("you won! :) ")
 
     print("\n\n")
-    input("press enter to exit (the jank is disposed after this, it's safe to igonre it)---")
+    input("press enter to exit (the input jank is disposed after this, it's safe to igonre it)---")
     print('\x1B[2J\x1B[0;0H')

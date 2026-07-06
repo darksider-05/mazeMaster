@@ -17,7 +17,7 @@ class Cover extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
         child: Container(
           width: min(vh, vw) * 0.7,
-          height: vh * 0.8,
+          height: vh * 0.85,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(30)),
             color: Colors.blueGrey.withAlpha(180),

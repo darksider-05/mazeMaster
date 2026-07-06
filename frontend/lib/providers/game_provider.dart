@@ -24,12 +24,12 @@ class GameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setMaze(List<List<int>> maze) {
-    this.maze = maze;
+  void setMaze(List maze) {
+    this.maze = (maze).map((row) => List<int>.from(row)).toList();
     notifyListeners();
   }
 
-  void setPlayer(int x, int y, int help) {
+  void setPlayer(int x, int y, double help) {
     player = (x, y);
     this.help = help / 50;
     notifyListeners();

@@ -22,7 +22,7 @@ class _GameBoardState extends State<GameBoard> {
     double wholeSize,
   ) {
     List<(double, double, int, int)> result = [];
-    var topLeftCorner = ((vw - wholeSize) / 2, (vh - wholeSize) / 2);
+    var topLeftCorner = ((vw - wholeSize) / 2, (vh - wholeSize) / 4);
     for (int enum1 = 0; enum1 < gridSize; enum1++) {
       for (int enum2 = 0; enum2 < gridSize; enum2++) {
         result.add((

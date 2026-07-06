@@ -1,10 +1,12 @@
+import json
+
 import keyboard
 import math
 
 helpBuffer = 0
 
 
-def mover(player, world, dt, blocker):
+async def mover(player, world, dt, blocker, visualizer, gui):
     global helpBuffer
     scaledt = min(dt * 8, 1)
     speed = 0.35 * scaledt
@@ -16,6 +18,8 @@ def mover(player, world, dt, blocker):
             player.deadEndSafe = True
             player.hints -=1
             help(player, blocker)
+            if gui:
+                await visualizer.publish({"type":"maze","world":world})
     else:
         if helpBuffer > 0:
             helpBuffer = helpBuffer-1

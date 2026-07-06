@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mazemaster/components/board.dart';
 import 'package:mazemaster/components/cover.dart';
+import 'package:mazemaster/components/help_progress_indicator.dart';
 import 'package:mazemaster/components/result.dart';
 import 'package:mazemaster/components/sky_widget.dart';
-import 'package:mazemaster/providers/app_root.dart';
 import 'package:mazemaster/providers/game_provider.dart';
 import 'package:mazemaster/providers/socket_provider.dart';
 import 'package:mazemaster/providers/star_provider.dart';
@@ -52,14 +52,12 @@ class AppRoot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var game = Provider.of<GameProvider>(context);
-    // var root = RootState(context);
-    // var vh = root.vh();
-    // var vw = root.vw();
     return Stack(
       children: [
         SkyWidget(),
         Cover(),
         !game.over ? GameBoard() : ResultWidget(win: game.won),
+        HelpProgressIndicator(),
       ],
     );
   }

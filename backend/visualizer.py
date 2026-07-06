@@ -13,7 +13,7 @@ class VisualizationServer:
         self.clients.add(websocket)
         await websocket.send(json.dumps({"type":"maze","world":world.world}))
         
-        print("Visualizer connected")
+        
 
         try:
             await websocket.wait_closed()
@@ -24,21 +24,24 @@ class VisualizationServer:
     async def start(self):
         self.server = await websockets.serve(
             self._handler,
-            "localhost",
+            "127.0.0.1",
             8765
         )
     
     async def publish(self, data):
         if not self.clients:
             return
-        if data == self.last_state:
+        if data == self.player_last_state:
             return
 
-        self.last_state = data
+        self.player_last_state = data
     
         message = json.dumps(data)
 
         dead = []
+        print('\x1B[2J\x1B[0;0H')
+        print("sent message:",data)
+        print(len(self.clients))
 
         for client in self.clients:
             try:
