@@ -15,9 +15,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => StarSimulation()),
         ChangeNotifierProvider(create: (_) => GameProvider()),
-        Provider(
+        ChangeNotifierProvider(
           lazy: false,
-          create: (context) => SocketProvider(context.read<GameProvider>()),
+          create: (s) => SocketProvider(s.read<GameProvider>()),
         ),
       ],
       child: const MyApp(),
@@ -58,6 +58,11 @@ class AppRoot extends StatelessWidget {
         Cover(),
         !game.over ? GameBoard() : ResultWidget(win: game.won),
         HelpProgressIndicator(),
+        Positioned(
+          left: 10,
+          top: 10,
+          child: Text(game.debug, style: TextStyle(color: Colors.white)),
+        ),
       ],
     );
   }

@@ -6,8 +6,10 @@ class GameProvider extends ChangeNotifier {
   double help = 0;
   bool over = false;
   bool won = false;
+  String debug = "Nothing yet";
 
   void applyMessage(Map<String, dynamic> msg) {
+    debug = msg.toString();
     switch (msg["type"]) {
       case "maze":
         setMaze(msg["world"]);
