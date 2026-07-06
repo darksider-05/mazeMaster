@@ -9,7 +9,8 @@ def selectMode():
                 1: to play the game in terminal mode
                     (it is not suitable with big worlds)
 
-                2: to play the game in GUI mode """)
+                2: to play the game in GUI mode
+                    (you have to run the Gui manually) """)
         a = input("your choice: ")
     if a == "1":
         return False

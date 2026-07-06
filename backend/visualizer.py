@@ -2,6 +2,8 @@ import asyncio
 import json
 import websockets
 import world
+import player
+import mover
 
 class VisualizationServer:
     def __init__(self):
@@ -12,6 +14,8 @@ class VisualizationServer:
     async def _handler(self, websocket):
         self.clients.add(websocket)
         await websocket.send(json.dumps({"type":"maze","world":world.world}))
+        
+
         
         
 

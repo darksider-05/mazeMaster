@@ -15,7 +15,7 @@ class ResultWidget extends StatelessWidget {
             win ? "You win!" : "You lose...",
             style: TextStyle(fontSize: 20),
           ),
-          ElevatedButton(
+          FloatingActionButton(
             onPressed: () {
               exit(0);
             },

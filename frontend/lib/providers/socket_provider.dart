@@ -9,7 +9,6 @@ class SocketProvider extends ChangeNotifier {
   late GameProvider game;
   @override
   void dispose() {
-    game.debug = ("SocketProvider disposed");
     channel.sink.close();
     super.dispose();
   }

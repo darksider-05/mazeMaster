@@ -6,10 +6,8 @@ class GameProvider extends ChangeNotifier {
   double help = 0;
   bool over = false;
   bool won = false;
-  String debug = "Nothing yet";
 
   void applyMessage(Map<String, dynamic> msg) {
-    debug = msg.toString();
     switch (msg["type"]) {
       case "maze":
         setMaze(msg["world"]);
@@ -31,9 +29,9 @@ class GameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setPlayer(int x, int y, int help) {
+  void setPlayer(int x, int y, num help) {
     player = (x, y);
-    this.help = help / 50;
+    this.help = help.toDouble() / 50;
     notifyListeners();
   }
 }

@@ -58,11 +58,6 @@ class AppRoot extends StatelessWidget {
         Cover(),
         !game.over ? GameBoard() : ResultWidget(win: game.won),
         HelpProgressIndicator(),
-        Positioned(
-          left: 10,
-          top: 10,
-          child: Text(game.debug, style: TextStyle(color: Colors.white)),
-        ),
       ],
     );
   }
