@@ -1,75 +1,95 @@
-# Maze Game
+# MazeMaster
 
-A maze game built with a **Python backend** and a **Flutter frontend**. The project combines procedural maze generation with real-time gameplay, with the backend serving as the game's core engine.
+MazeMaster is a maze game built with a **Python backend** and a **Flutter frontend**. The backend contains the game engine and maze generation logic, while the frontend provides a graphical interface that communicates with the game through WebSockets.
+
+
+feel free to check out the background of the app [here](https://darksider-05.github.io/mazeMaster/)
 
 ## Features
 
-* Procedurally generated mazes using a recursive backtracking algorithm.
-* Real-time game loop with asynchronous updates.
-* Collision detection and movement handling.
-* Win and loss state detection.
+* Procedurally generated mazes.
+* Recursive backtracking maze generation.
+* Interactive Flutter user interface.
+* Real-time communication between frontend and backend using WebSockets.
+* Player movement with collision detection.
 * Hint system.
-* Dynamic maze modification during gameplay to increase difficulty.
-* Modular Python architecture separating game engine, world generation, player logic, movement, rendering, and game-state checking.
+* Dynamic maze updates during gameplay.
+* Win and game-over detection.
+* Modular architecture separating game logic, rendering, networking, and UI.
 
-## Project Structure
+## Tech Stack
 
-```
-backend/
-├── engine.py      # Main game loop
-├── world.py       # Maze generation and world logic
-├── mover.py       # Player movement
-├── player.py      # Player state
-├── checker.py     # Win/loss conditions
-├── printer.py     # Console rendering
-└── test.py
-```
+### Backend
 
-## Technologies
+* Python 3
+* asyncio
+* WebSockets
+* Colorama
 
-* **Backend:** Python 3
-* **Frontend:** Flutter
+### Frontend
 
-## How the Backend Works
+* Flutter
+* Provider
+* web_socket_channel
 
-1. A maze is generated based on the requested size.
-2. The game engine starts an asynchronous update loop.
-3. Player input updates the player's position.
-4. Collision and game-state checks are performed every frame.
-5. The maze is rendered in the console while the game is running.
-6. The game ends when the player reaches the goal or loses.
+## Architecture
 
-## Running the Backend
+The project is divided into two independent applications:
 
-From the `backend` directory:
+* **Python Backend**
+
+  * Generates and manages the maze.
+  * Processes player movement.
+  * Detects game events.
+  * Hosts a WebSocket server for communication.
+
+* **Flutter Frontend**
+
+  * Displays the maze and game state.
+  * Sends player input.
+  * Receives live updates from the backend through WebSockets.
+  * Manages UI state using the Provider package.
+
+## Running the Project
+
+### First
 
 ```bash
-python engine.py
+pip install colorama websockets
 ```
 
-You will be prompted to enter the maze size before the game starts.
+### Then,
+
+```text
+Download and run the releases in the repository
+```
+
+The frontend connects to the backend automatically over:
+
+```text
+ws://127.0.0.1:8765
+```
+
+Make sure the backend is running before launching the Flutter application.
+
+## Gameplay
+
+1. Start the backend.
+2. Launch the Flutter application.
+3. A maze is generated.
+4. Navigate from the start to the goal while avoiding dead ends.
+5. Use hints when needed.
+6. Reach the exit to win.
 
 ## Algorithms
 
 ### Maze Generation
 
-The maze is generated using a depth-first recursive backtracking algorithm, producing a fully connected maze with a unique path between any two cells.
+The maze is generated using a recursive depth-first search (recursive backtracking) algorithm. This guarantees a connected maze with a unique path between any two cells.
 
-### Dynamic Blocking
+### Game Engine
 
-During gameplay, sections of the maze may be blocked while preserving a valid route to the goal, creating a more challenging and adaptive experience.
-
-## Project Status
-
-* ✅ Backend complete
-* 🔄 Flutter interface being integrated
-
-## Future Improvements
-
-* Complete Flutter user interface.
-* Connect the Flutter frontend directly to the Python game engine.
-* Improve graphics, animations, and user experience.
-* Additional gameplay options and customization.
+The backend uses Python's `asyncio` event loop to process gameplay and synchronize state updates with connected clients in real time.
 
 ## License
 
